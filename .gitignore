@@ -1,0 +1,8 @@
+
+/.idea/*
+/build
+/packages/theme/sass/.sass-cache
+
+.sencha_backup*
+
+build-sass.xml
