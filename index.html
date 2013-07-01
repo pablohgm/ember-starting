@@ -1,53 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Base in Ember Starter Kit</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.css">
 </head>
 <body>
 
-  <script type="text/x-handlebars" data-template-name="application">
-      <h1>Starter Ember App</h1>
-    {{outlet}}
-  </script>
+    <script type="text/x-handlebars" data-template-name="home">
+        {{outlet}}
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3>HEADER - Starter Ember App</h3>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <h3>SLIDE BAR CONTENT</h3>
+                    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
+                        {{#if teams.isLoaded}}
+                            <ul>
+                                {{#each team in teams}}
+                                {{#linkTo "team" team}}
+                                    <p> {{team.email}} </p>
+                                {{/linkTo}}
+                                {{/each}}
+                                <li>
+                                    {{#linkTo "test.summary"}}Location{{/linkTo}}
+                                </li>
+                            </ul>
+                        {{else}}
+                         <p class="loading">...Loading teams</p>
+                        {{/if}}
+                    </ul>
+                </div>
+                <div class="span10">
+                    <p>MAIN CONTENT</p>
+                </div>
+            </div>
+        </div>
+    </script>
 
-  <script type="text/x-handlebars" data-template-name="home">
+    <script type="text/x-handlebars" data-template-name="team">
+        <h3>Team Page: {{email}}</h3>
+        <p> team colors: {{id}} </p>
+    </script>
 
-      <h3>Basic List</h3>
+    <script type="text/x-handlebars" id="test/summary">
+        <p> Complete route test</p>
+        {{outlet}}
+    </script>
 
-      <ul>
-          {{#each item in info}}
-          <li>{{item}}</li>
-          {{/each}}
-      </ul>
+  <!--<script type="text/x-handlebars" data-template-name="home">-->
 
-      <h3>Teams</h3>
+      <!--<h3>Basic List</h3>-->
+      <!--<ul>-->
+          <!--{{#each item in info}}-->
+          <!--<li>{{item}}</li>-->
+          <!--{{/each}}-->
+      <!--</ul>-->
 
-      {{#if teams.isLoaded}}
-      <ul>
-          {{#each team in teams}}
-          {{#linkTo "team" team}}
-          <p> {{team.name}} </p>
-          {{/linkTo}}
-          {{/each}}
-      </ul>
-      {{else}}
-      <p class="loading">...Loading teams</p>
-      {{/if}}
+      <!--<h3>Teams</h3>-->
 
-  </script>
+      <!--{{#if teams.isLoaded}}-->
+      <!--<ul>-->
+          <!--{{#each team in teams}}-->
+          <!--{{#linkTo "team" team}}-->
+          <!--<p> {{team.name}} </p>-->
+          <!--{{/linkTo}}-->
+          <!--{{/each}}-->
+      <!--</ul>-->
+      <!--{{else}}-->
+        <!--<p class="loading">...Loading teams</p>-->
+      <!--{{/if}}-->
 
-  <script type="text/x-handlebars" data-template-name="team">
-      <h3>Team Page: {{name}}</h3>
-      <p> team colors: {{colors}} </p>
-  </script>
+  <!--</script>-->
 
   <script src="js/libs/jquery-1.9.1.js"></script>
   <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
   <script src="js/libs/ember-1.0.0-rc.3.js"></script>
   <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
   <script src="js/app.js"></script>
 
 </body>
