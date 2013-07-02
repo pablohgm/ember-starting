@@ -1,0 +1,20 @@
+<h3>Basic List</h3>
+
+<ul>
+{{#each item in info}}
+<li>{{item}}</li>
+{{/each}}
+</ul>
+
+<h3>Teams</h3>
+{{#if teams.isLoaded}}
+    <ul>
+        {{#each team in teams}}
+        {{#linkTo "team" team}}
+    <p> {{team.name}} </p>
+        {{/linkTo}}
+        {{/each}}
+    </ul>
+{{else}}
+    <p class="loading">...Loading teams</p>
+{{/if}}

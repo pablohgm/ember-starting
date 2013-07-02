@@ -13,31 +13,32 @@
     {{outlet}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="home">
 
-      <h3>Basic List</h3>
+  <!--<script type="text/x-handlebars" data-template-name="home">-->
 
-      <ul>
-          {{#each item in info}}
-          <li>{{item}}</li>
-          {{/each}}
-      </ul>
+      <!--<h3>Basic List</h3>-->
 
-      <h3>Teams</h3>
+      <!--<ul>-->
+          <!--{{#each item in info}}-->
+          <!--<li>{{item}}</li>-->
+          <!--{{/each}}-->
+      <!--</ul>-->
 
-      {{#if teams.isLoaded}}
-      <ul>
-          {{#each team in teams}}
-          {{#linkTo "team" team}}
-          <p> {{team.name}} </p>
-          {{/linkTo}}
-          {{/each}}
-      </ul>
-      {{else}}
-      <p class="loading">...Loading teams</p>
-      {{/if}}
+      <!--<h3>Teams</h3>-->
 
-  </script>
+      <!--{{#if teams.isLoaded}}-->
+      <!--<ul>-->
+          <!--{{#each team in teams}}-->
+          <!--{{#linkTo "team" team}}-->
+          <!--<p> {{team.name}} </p>-->
+          <!--{{/linkTo}}-->
+          <!--{{/each}}-->
+      <!--</ul>-->
+      <!--{{else}}-->
+      <!--<p class="loading">...Loading teams</p>-->
+      <!--{{/if}}-->
+
+  <!--</script>-->
 
   <script type="text/x-handlebars" data-template-name="team">
       <h3>Team Page: {{name}}</h3>
@@ -45,10 +46,12 @@
   </script>
 
   <script src="js/libs/jquery-1.9.1.js"></script>
-  <script src="js/libs/handlebars-1.0.0-rc.3.js"></script>
-  <script src="js/libs/ember-1.0.0-rc.3.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.js"></script>
   <script src="js/libs/ember-data.js"></script>
   <script src="js/app.js"></script>
+
+  <script src="compile-templates/home.js"></script>
 
 </body>
 </html>
