@@ -5,7 +5,7 @@ App.Router.map(function() {
     this.resource('test', function(){
         this.route('summary')
     });
-    this.resource('team', { path: '/team/:team_id' });
+    this.resource('user', { path: '/user/:user_id' });
 });
 
 App.HomeRoute = Ember.Route.extend({
@@ -14,21 +14,21 @@ App.HomeRoute = Ember.Route.extend({
     },
     setupController: function(controller, model){
         controller.set('info', model)
-        controller.set('teams', App.User.find());
+        controller.set('users', App.User.find());
     }
 });
 
 /** STORES */
 
-DS.RESTAdapter.reopen({
-    url: 'http://localhost:8000/main'
-//    url:'/ws/ember'
-});
+//DS.RESTAdapter.reopen({
+//    url: 'http://localhost:8000/main'
+////    url:'/ws/ember'
+//});
 
 App.Store = DS.Store.extend({
-    revision: 13
+    revision: 13,
 //    url:"http://localhost:8000/main"
-//    adapter: 'DS.FixtureAdapter'
+    adapter: 'DS.FixtureAdapter'
 });
 
 /** MODELS */
@@ -41,14 +41,9 @@ App.User = DS.Model.extend({
 /**FIXTURES*/
 
 App.User.FIXTURES = [{
-    pk: 4,
+    id: 1,
     name: "a",
-    email: "jclare@alivebox.com",
-    entity_status: 0,
-    id: 4,
-    password: "ffd534f67f52647378dc626d28c25746",
-    default_group: 32767,
-    session_key: "1"
+    email: "jclare@alivebox.com"
 //}, {
 //    id: 2,
 //    name: 'Lakers',

@@ -10,7 +10,7 @@
 {{#if users.isLoaded}}
     <ul>
         {{#each user in users}}
-        {{#linkTo "user" team}}
+        {{#linkTo "user" user}}
     <p> {{user.email}} </p>
         {{/linkTo}}
         {{/each}}
