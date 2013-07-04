@@ -5,60 +5,46 @@ App.Router.map(function() {
     this.resource('test', function(){
         this.route('summary')
     });
-    this.resource('user', { path: '/user/:user_id' });
+    this.resource('movie', { path: '/movie/:movie_id' });
 });
 
 App.HomeRoute = Ember.Route.extend({
     model: function() {
-        return ['Whats new', 'Journal', 'Research'];
+        return App.Movie.all();
     },
     setupController: function(controller, model){
         controller.set('info', model)
-        controller.set('users', App.User.find());
+        controller.set('movies', model);
     }
 });
 
-/** STORES */
+App.Movie = Ember.Object.extend();
 
-//DS.RESTAdapter.reopen({
-//    url: 'http://localhost:8000/main'
-////    url:'/ws/ember'
-//});
+App.Movie.reopenClass({
 
-App.Store = DS.Store.extend({
-    revision: 13,
-//    url:"http://localhost:8000/main"
-    adapter: 'DS.FixtureAdapter'
+    loadLinks: function() {
+        var that = this;
+        return Ember.Deferred.promise(function (p) {
+            p.resolve($.ajax({
+                    type: "GET",
+                    dataType: "jsonp",
+                    url: "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?limit=10&country=ca&apikey=jv7ktqjfbzj9rxe2gkx5fvk5"
+                }).then(that.onLoadLinksResult));
+        });
+    },
+
+    onLoadLinksResult: function(response) {
+        var movies = [];
+        response.movies.forEach( function (movie) {
+            movies.push( App.Movie.create(movie) );
+        });
+        return movies;
+    },
+
+    all: function() {
+        return this.loadLinks().then(function(movies){
+            return movies;
+        });
+    }
+
 });
-
-/** MODELS */
-
-App.User = DS.Model.extend({
-    name: DS.attr('string'),
-    email: DS.attr('string')
-})
-
-/**FIXTURES*/
-
-App.User.FIXTURES = [{
-    id: 1,
-    name: "a",
-    email: "jclare@alivebox.com"
-//}, {
-//    id: 2,
-//    name: 'Lakers',
-//    email: 'Yellow, Black'
-//}, {
-//    id: 3,
-//    name: 'Bulls',
-//    email: 'Red, Black'
-//}, {
-//    id: 4,
-//    name: 'Mavericks',
-//    email: 'Blue, White'
-//}, {
-//    id: 5,
-//    name: 'Spurs',
-//    email: 'Black, Grey, White'
-//
- }];

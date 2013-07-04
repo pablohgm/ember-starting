@@ -1,20 +1,14 @@
 <h3>Basic List</h3>
-
 <ul>
-{{#each user in info}}
-<li>{{user}}</li>
+{{#each movie in info}}
+<li>{{movie.title}}</li>
 {{/each}}
 </ul>
-
-<h3>Teams</h3>
-{{#if users.isLoaded}}
-    <ul>
-        {{#each user in users}}
-        {{#linkTo "user" user}}
-    <p> {{user.email}} </p>
-        {{/linkTo}}
-        {{/each}}
-    </ul>
-{{else}}
-    <p class="loading">...Loading teams</p>
-{{/if}}
+<h3>Movies</h3>
+  <ul>
+      {{#each movie in movies}}
+      {{#linkTo "movie" movie}}
+        <p> {{movie.year }}&nbsp{{movie.title}}</p>
+      {{/linkTo}}
+      {{/each}}
+  </ul>
