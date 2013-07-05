@@ -15,6 +15,29 @@ App.HomeRoute = Ember.Route.extend({
     setupController: function(controller, model){
         controller.set('info', model)
         controller.set('movies', model);
+        this.loadDataTable(controller,model);
+
+    },
+    loadDataTable:function(controller, model){
+        debugger;
+            $('#dynamic').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
+            $('#example').dataTable( {
+                "aaData": model,
+                "aoColumns": [
+                    { "sTitle": "Engine" },
+                    { "sTitle": "Browser" },
+                    { "sTitle": "Platform" },
+                    { "sTitle": "Version", "sClass": "center" },
+                    {
+                        "sTitle": "Grade",
+                        "sClass": "center"
+                    }
+                ]
+            } );
+            $('td.center').editable('', {
+                type : 'select',
+                data:['Select an option','A','B','C']
+            });
     }
 });
 
